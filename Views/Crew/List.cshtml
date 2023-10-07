@@ -1,0 +1,44 @@
+﻿@*  The view for the Crew/List action. Displays a list of all crews. *@
+@model CrewViewModel
+@{
+    ViewBag.Title = "Crew Manager";
+}
+
+<h1>Crew Manager</h1>
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Crew ID</th>
+            <th>Crew Foreman</th>
+            <th>Crew Member 1</th>
+            <th>Crew Member 2</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var crew in Model.Crews)
+        {
+            <tr>
+                <td>@crew.CrewID</td>
+                <td>@crew.EmpForeman.EmployeeFullName</td>
+                <td>@crew.EmpMember1.EmployeeFullName</td>
+                <td>@crew.EmpMember2.EmployeeFullName</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@crew.CrewID"
+                       class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <a asp-action="Delete"
+                       asp-route-id="@crew.CrewID"
+                       class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add" class="btn btn-primary mb-2">Add Crew</a>

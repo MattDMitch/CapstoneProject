@@ -1,0 +1,17 @@
+﻿@*  The view for the Crew/Delete action. Displays a Delete Crew page that confirms the deletion. *@
+@model Crew
+@{
+    ViewBag.Title = "Delete Crew";
+}
+
+<div class="jumbotron alert-danger mt-4">
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete Crew '@Model.CrewID'?</p>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="CrewID" />
+
+        <button type="submit" class="btn btn-primary">Delete</button>
+        <a asp-action="List" class="btn btn-primary">Cancel</a>
+    </form>
+</div>

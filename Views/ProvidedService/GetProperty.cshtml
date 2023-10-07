@@ -1,0 +1,36 @@
+﻿@*  The view for the Get Property action for filtering. Displays the Get Property page *@
+@model Property
+@{
+    string title = ViewBag.Action + " Get Property";
+    ViewBag.Title = title;
+}
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form asp-action="GetProperty" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row form-group">
+        <label asp-for="PropertyID" class="col-sm-3">Property</label>
+        <div class="col-sm-6">
+            <select asp-for="PropertyID"
+                    asp-items="@(new SelectList(ViewBag.Properties,
+                         "PropertyID", "PropertyAddress",
+                         Model.PropertyID.ToString()))"
+                    class="form-control">
+                <option value="">Select a property...</option>
+            </select>
+        </div>
+
+        <div class="col">
+            <span asp-validation-for="PropertyID" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Select</button>
+    <a asp-action="List" class="btn btn-primary">Cancel</a>
+</form>

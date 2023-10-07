@@ -1,0 +1,47 @@
+﻿@*  The view for the Customer/List action. Displays a list of all customers. *@
+@model List<Customer>
+@{
+    ViewBag.Title = "Customer Manager";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Billing Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>ZIP</th>
+            <th>Phone Number</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.BillingAddress</td>
+                <td>@customer.BillingCity</td>
+                <td>@customer.StateID</td>
+                <td>@customer.BillingZIP</td>
+                <td>@customer.PhoneNumber</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@customer.CustomerID"
+                       class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <a asp-action="Delete"
+                       asp-route-id="@customer.CustomerID"
+                       class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add" class="btn btn-primary mb-2">Add Customer</a>

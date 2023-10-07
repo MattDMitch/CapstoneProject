@@ -1,0 +1,90 @@
+﻿@*  The view for the Provided Service/AddEdit action. Displays the Add/Edit Provided Services page *@
+@model ProvidedServiceViewModel
+@{
+    string title = Model.Action + " Provided Service";
+    ViewBag.Title = title;
+}
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form asp-action="Save" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row form-group">
+        <label asp-for="ProvidedService.CrewID" class="col-sm-3">Crew</label>
+        <div class="col-sm-6">
+            <select asp-for="ProvidedService.CrewID"
+                    asp-items="@(new SelectList(Model.Crews,
+                         "CrewID", "CrewID",
+                         Model.ProvidedService.CrewID.ToString()))"
+                    class="form-control">
+                <option value="">Select a crew...</option>
+            </select>
+        </div>
+        <div class="col">
+            <span asp-validation-for="ProvidedService.CrewID" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <label asp-for="ProvidedService.CustomerID" class="col-sm-3">Customer</label>
+        <div class="col-sm-6">
+            <select asp-for="ProvidedService.CustomerID"
+                    asp-items="@(new SelectList(Model.Customers,
+                         "CustomerID", "Name",
+                         Model.ProvidedService.CustomerID.ToString()))"
+                    class="form-control">
+                <option value="">Select a customer...</option>
+            </select>
+        </div>
+        <div class="col">
+            <span asp-validation-for="ProvidedService.CustomerID" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <label asp-for="ProvidedService.PropertyID" class="col-sm-3">Property</label>
+        <div class="col-sm-6">
+            <select asp-for="ProvidedService.PropertyID"
+                    asp-items="@(new SelectList(Model.Properties,
+                         "PropertyID", "PropertyAddress",
+                         Model.ProvidedService.PropertyID.ToString()))"
+                    class="form-control">
+                <option value="">Select a property...</option>
+            </select>
+        </div>
+        <div class="col">
+            <span asp-validation-for="ProvidedService.PropertyID" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <label asp-for="ProvidedService.ServiceDate" class="col-sm-3">Service Date</label>
+        <div class="col-sm-6">
+            <input asp-for="ProvidedService.ServiceDate" class="form-control">
+        </div>
+        <div class="col">
+            <span asp-validation-for="ProvidedService.ServiceDate" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <label asp-for="ProvidedService.ServiceFee" class="col-sm-3">Service Fee</label>
+        <div class="col-sm-6">
+            <input asp-for="ProvidedService.ServiceFee" class="form-control">
+        </div>
+        <div class="col">
+            <span asp-validation-for="ProvidedService.ServiceFee" class="text-danger"></span>
+        </div>
+    </div>
+
+    <input type="hidden" asp-for="ProvidedService.ProvidedServiceID" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="List" class="btn btn-primary">Cancel</a>
+</form>

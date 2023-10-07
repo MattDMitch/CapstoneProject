@@ -1,0 +1,75 @@
+﻿@*  The view for the Crew/AddEdit action. Displays the Add/Edit Crew page *@
+@model CrewViewModel
+@{
+    string title = Model.Action + " Crew";
+    ViewBag.Title = title;
+}
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form asp-action="Save" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    @*<div class="form-group">
+            <label asp-for="Crew.CrewID">Crew ID</label>
+            <label class="form-control">@Model.Crew.CrewID</label>
+        </div>*@
+
+    <div class="row form-group">
+        <label asp-for="Crew.CrewForeman" class="col-sm-3">Crew Foreman</label>
+        <div class="col-sm-6">
+            <select asp-for="Crew.CrewForeman"
+                    asp-items="@(new SelectList(Model.EmpForeman,
+                         "EmployeeID", "EmployeeFullName",
+                         Model.Crew.CrewForeman.ToString()))"
+                    class="form-control">
+                <option value="">Select a crew foreman...</option>
+            </select>
+        </div>
+        <div class="col">
+            <span asp-validation-for="Crew.CrewForeman" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <label asp-for="Crew.CrewMember1" class="col-sm-3">Crew Member 1</label>
+        <div class="col-sm-6">
+            <select asp-for="Crew.CrewMember1"
+                    asp-items="@(new SelectList(Model.EmpMember1,
+                         "EmployeeID", "EmployeeFullName",
+                         Model.Crew.CrewMember1.ToString()))"
+                    class="form-control">
+                <option value="">Select a crew member...</option>
+            </select>
+        </div>
+        <div class="col">
+            <span asp-validation-for="Crew.CrewMember1" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <label asp-for="Crew.CrewMember2" class="col-sm-3">Crew Member 2</label>
+        <div class="col-sm-6">
+            <select asp-for="Crew.CrewMember2"
+                    asp-items="@(new SelectList(Model.EmpMember2,
+                         "EmployeeID", "EmployeeFullName",
+                         Model.Crew.CrewMember2.ToString()))"
+                    class="form-control">
+                <option value="">Select a crew member...</option>
+            </select>
+        </div>
+        <div class="col">
+            <span asp-validation-for="Crew.CrewMember2" class="text-danger"></span>
+        </div>
+    </div>
+
+    <input type="hidden" asp-for="Crew.CrewID" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="List" class="btn btn-primary">Cancel</a>
+</form>

@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<center><h1>Jasper Green Lawn Care</h1></center>
+<p>Admin Panel for Jasper Green</p>
+
+<h1>Admin</h1>
+<div class="list-group">
+    <a asp-controller="Customer" asp-action="List"
+       class="list-group-item">Manage Customers</a>
+    <a asp-controller="Employee" asp-action="List"
+       class="list-group-item">Manage Employees</a>
+    <a asp-controller="Crew" asp-action="List"
+       class="list-group-item">Manage Crews</a>
+    <a asp-controller="Property" asp-action="List"
+       class="list-group-item">Manage Properties</a>
+    <a asp-controller="ProvidedService" asp-action="List"
+       class="list-group-item">Manage Provided Services</a>
+    <a asp-controller="Payment" asp-action="List"
+       class="list-group-item">Manage Payments</a>
+</div>
+

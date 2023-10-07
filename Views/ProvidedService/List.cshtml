@@ -1,0 +1,53 @@
+﻿@*  The view for the Provided Service/List action. Displays a list of all provided services. *@
+@model ProvidedServiceViewModel
+@{
+    ViewBag.Title = "Provided Service Manager";
+}
+
+
+<h1>@ViewBag.Title</h1>
+
+<nav class="nav nav-pills mb-3">
+    <a class="nav-item nav-link btn-primary m-2 @(ViewBag.Filter == "customer" ? "active" : "")" asp-controller="ProvidedService" asp-action="GetCustomer" asp-route-id="customer">Get Customers</a>
+    <a class="nav-item nav-link btn-primary m-2 @(ViewBag.Filter == "crew" ? "active" : "")" asp-controller="ProvidedService" asp-action="GetCrew" asp-route-id="crew">Get Crews</a>
+    <a class="nav-item nav-link btn-primary m-2 @(ViewBag.Filter == "property" ? "active" : "")" asp-controller="ProvidedService" asp-action="GetProperty" asp-route-id="property">Get Properties</a>
+    <a class="nav-item nav-link btn-primary m-2 @(ViewBag.Filter == "list" ? "active" : "")" asp-controller="ProvidedService" asp-action="List" asp-route-id="list">All</a>
+</nav>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Crew</th>
+            <th>Customer</th>
+            <th>Property</th>
+            <th>Service Date</th>
+            <th>Service Fee</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model.ProvidedServices)
+        {
+            <tr>
+                <td>@service.Crew.CrewID</td>
+                <td>@service.Customer.Name</td>
+                <td>@service.Property.PropertyAddress</td>
+                <td>@service.ServiceDate.ToShortDateString()</td>
+                <td>@service.ServiceFee.ToString("C2")</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@service.ProvidedServiceID"
+                       class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <a asp-action="Delete"
+                       asp-route-id="@service.ProvidedServiceID"
+                       class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add" class="btn btn-primary mb-2">Add Provided Service</a>
